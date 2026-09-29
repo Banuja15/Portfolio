@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Banuja R. — Software Developer & AI/ML Data Science Enthusiast focused on building practical applications, backend services, APIs, and intelligent systems." />
-  <meta name="theme-color" content="#315cf5" />
+  <meta name="theme-color" content="#111521" />
   <title>Banuja R. | Software Developer & AI/ML Data Science Enthusiast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
-<body>
+<body data-theme="dark">
   <div class="progress" id="progress"></div>
   <header class="nav">
     <div class="container nav-inner">
@@ -83,7 +83,7 @@
         <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#certifications">Certifications</a><a href="#achievements">Achievements</a><a href="#contact">Contact</a>
       </nav>
       <a class="nav-cta" href="assets/resume.pdf" download>Download Resume ↓</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch theme">☾</button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
     </div>
   </header>
@@ -307,8 +307,33 @@
     const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
     const themeToggle=$('#themeToggle');
     const savedTheme=localStorage.getItem('banuja-theme');
-    if(savedTheme==='dark'){document.body.dataset.theme='dark';themeToggle.textContent='☀';themeToggle.setAttribute('aria-label','Switch to light mode');}
-    themeToggle.addEventListener('click',()=>{const dark=document.body.dataset.theme!=='dark';if(dark){document.body.dataset.theme='dark';localStorage.setItem('banuja-theme','dark');themeToggle.textContent='☀';themeToggle.setAttribute('aria-label','Switch to light mode');themeToggle.title='Switch to light mode';}else{delete document.body.dataset.theme;localStorage.setItem('banuja-theme','light');themeToggle.textContent='☾';themeToggle.setAttribute('aria-label','Switch to dark mode');themeToggle.title='Switch to dark mode';}});
+    if(savedTheme==='light'){
+      delete document.body.dataset.theme;
+      themeToggle.textContent='☾';
+      themeToggle.setAttribute('aria-label','Switch to dark mode');
+      themeToggle.title='Switch to dark mode';
+    }else{
+      document.body.dataset.theme='dark';
+      themeToggle.textContent='☀';
+      themeToggle.setAttribute('aria-label','Switch to light mode');
+      themeToggle.title='Switch to light mode';
+    }
+    themeToggle.addEventListener('click',()=>{
+      const isDark=document.body.dataset.theme==='dark';
+      if(isDark){
+        delete document.body.dataset.theme;
+        localStorage.setItem('banuja-theme','light');
+        themeToggle.textContent='☾';
+        themeToggle.setAttribute('aria-label','Switch to dark mode');
+        themeToggle.title='Switch to dark mode';
+      }else{
+        document.body.dataset.theme='dark';
+        localStorage.setItem('banuja-theme','dark');
+        themeToggle.textContent='☀';
+        themeToggle.setAttribute('aria-label','Switch to light mode');
+        themeToggle.title='Switch to light mode';
+      }
+    });
     const menu=$('#menuToggle'), nav=$('#navLinks');
     menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open?'true':'false');menu.textContent=open?'✕':'☰';});
     $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰';}));
